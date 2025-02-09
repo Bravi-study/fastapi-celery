@@ -1,0 +1,89 @@
+[2025-02-07 18:32:28,815: WARNING/MainProcess] /usr/local/lib/python3.11/site-packages/celery/app/utils.py:203: CDeprecationWarning: 
+    The 'CELERY_RESULT_BACKEND' setting is deprecated and scheduled for removal in
+    version 6.0.0. Use the result_backend instead
+
+  deprecated.warn(description=f'The {setting!r} setting',
+
+[2025-02-07 18:32:28,815: WARNING/MainProcess] Please run `celery upgrade settings path/to/settings.py` to avoid these warnings and to allow a smoother upgrade to Celery 6.0.
+[2025-02-07 18:32:29,065: WARNING/MainProcess] /usr/local/lib/python3.11/site-packages/celery/worker/consumer/consumer.py:507: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2025-02-07 18:32:34,078: INFO/MainProcess] Connected to redis://redis:6379/0
+[2025-02-07 18:32:34,079: WARNING/MainProcess] /usr/local/lib/python3.11/site-packages/celery/worker/consumer/consumer.py:507: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2025-02-07 18:32:34,082: INFO/MainProcess] mingle: searching for neighbors
+[2025-02-07 18:32:35,090: INFO/MainProcess] mingle: all alone
+[2025-02-07 18:32:35,104: INFO/MainProcess] celery@3f6b057113a7 ready.
+[2025-02-07 18:32:37,828: INFO/MainProcess] Events of group {task} enabled by remote.
+[2025-02-07 18:34:38,969: INFO/MainProcess] beat: Starting...
+[2025-02-07 18:34:39,073: WARNING/MainProcess] /usr/local/lib/python3.11/site-packages/celery/app/utils.py:203: CDeprecationWarning: 
+    The 'CELERY_RESULT_BACKEND' setting is deprecated and scheduled for removal in
+    version 6.0.0. Use the result_backend instead
+
+  deprecated.warn(description=f'The {setting!r} setting',
+
+[2025-02-07 18:34:39,073: WARNING/MainProcess] Please run `celery upgrade settings path/to/settings.py` to avoid these warnings and to allow a smoother upgrade to Celery 6.0.
+[2025-02-07 18:34:39,307: WARNING/MainProcess] /usr/local/lib/python3.11/site-packages/celery/worker/consumer/consumer.py:507: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2025-02-07 18:34:44,321: INFO/MainProcess] Connected to redis://redis:6379/0
+[2025-02-07 18:34:44,322: WARNING/MainProcess] /usr/local/lib/python3.11/site-packages/celery/worker/consumer/consumer.py:507: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2025-02-07 18:34:44,326: INFO/MainProcess] mingle: searching for neighbors
+[2025-02-07 18:34:45,337: INFO/MainProcess] mingle: all alone
+[2025-02-07 18:34:45,353: INFO/MainProcess] celery@3f6b057113a7 ready.
+[2025-02-07 18:34:49,508: INFO/MainProcess] Events of group {task} enabled by remote.
+[2025-02-07 18:35:26,475: INFO/MainProcess] Task project.users.tasks.task_test_logger[5db4ee4a-8848-4c6a-a97b-607ef5959ff1] received
+[2025-02-07 18:35:26,480: INFO/ForkPoolWorker-7] Task project.users.tasks.task_test_logger[5db4ee4a-8848-4c6a-a97b-607ef5959ff1] succeeded in 0.003252458999668306s: None
+[2025-02-07 18:36:12,383: INFO/MainProcess] Task project.users.tasks.task_send_welcome_email[48051340-bfed-4724-8f92-b0a5a2af706d] received
+[2025-02-07 18:36:12,408: INFO/ForkPoolWorker-7] Task project.users.tasks.task_send_welcome_email[48051340-bfed-4724-8f92-b0a5a2af706d] succeeded in 0.022730458000296494s: None
+[2025-02-07 18:36:20,120: INFO/MainProcess] Task project.users.tasks.task_send_welcome_email[69117fae-3ece-4845-9380-ddc8702bda18] received
+[2025-02-07 18:36:20,124: INFO/ForkPoolWorker-7] Task project.users.tasks.task_send_welcome_email[69117fae-3ece-4845-9380-ddc8702bda18] succeeded in 0.002914208000220242s: None
+[2025-02-07 18:36:35,024: INFO/MainProcess] Task project.users.tasks.task_send_welcome_email[80a17b5e-648a-483e-b255-66baea4b8b12] received
+[2025-02-07 18:36:35,029: INFO/ForkPoolWorker-7] Task project.users.tasks.task_send_welcome_email[80a17b5e-648a-483e-b255-66baea4b8b12] succeeded in 0.003146542000649788s: None
+[2025-02-07 18:36:55,435: INFO/MainProcess] Task project.users.tasks.task_send_welcome_email[7a1b289c-fe51-4789-836b-950c8f671a59] received
+[2025-02-07 18:36:55,439: INFO/ForkPoolWorker-7] Task project.users.tasks.task_send_welcome_email[7a1b289c-fe51-4789-836b-950c8f671a59] succeeded in 0.0028602079992197105s: None
+[2025-02-07 23:36:34,620: INFO/MainProcess] Task project.users.tasks.task_send_welcome_email[51fc6766-f45b-4dc2-a894-265c690e7468] received
+[2025-02-07 23:36:34,641: INFO/ForkPoolWorker-7] Task project.users.tasks.task_send_welcome_email[51fc6766-f45b-4dc2-a894-265c690e7468] succeeded in 0.013742082999669947s: None
+[2025-02-07 23:36:43,377: INFO/MainProcess] Task project.users.tasks.task_send_welcome_email[a696a941-390f-4c26-a7f7-ce2b8ce0dec1] received
+[2025-02-07 23:36:43,382: INFO/ForkPoolWorker-7] Task project.users.tasks.task_send_welcome_email[a696a941-390f-4c26-a7f7-ce2b8ce0dec1] succeeded in 0.0030232499993871897s: None
+[2025-02-07 23:36:50,310: INFO/MainProcess] Task project.users.tasks.task_send_welcome_email[0f7a1626-d331-4050-843a-61725b68ad19] received
+[2025-02-07 23:36:50,316: INFO/ForkPoolWorker-7] Task project.users.tasks.task_send_welcome_email[0f7a1626-d331-4050-843a-61725b68ad19] succeeded in 0.003720291002537124s: None
+[2025-02-08 03:43:12,474: WARNING/MainProcess] /usr/local/lib/python3.11/site-packages/celery/app/utils.py:203: CDeprecationWarning: 
+    The 'CELERY_RESULT_BACKEND' setting is deprecated and scheduled for removal in
+    version 6.0.0. Use the result_backend instead
+
+  deprecated.warn(description=f'The {setting!r} setting',
+
+[2025-02-08 03:43:12,475: WARNING/MainProcess] Please run `celery upgrade settings path/to/settings.py` to avoid these warnings and to allow a smoother upgrade to Celery 6.0.
+[2025-02-08 03:43:12,771: WARNING/MainProcess] /usr/local/lib/python3.11/site-packages/celery/worker/consumer/consumer.py:507: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2025-02-08 03:43:17,784: INFO/MainProcess] Connected to redis://redis:6379/0
+[2025-02-08 03:43:17,788: WARNING/MainProcess] /usr/local/lib/python3.11/site-packages/celery/worker/consumer/consumer.py:507: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2025-02-08 03:43:17,799: INFO/MainProcess] mingle: searching for neighbors
+[2025-02-08 03:43:18,832: INFO/MainProcess] mingle: all alone
+[2025-02-08 03:43:18,841: INFO/MainProcess] celery@3f6b057113a7 ready.
+[2025-02-08 03:43:19,479: INFO/MainProcess] Events of group {task} enabled by remote.

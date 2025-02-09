@@ -11,3 +11,5 @@ wheels/
 .vscode
 .mypy_cache
 *.code-workspace
+
+list_*

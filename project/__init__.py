@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from project.celery_utils import create_celery
+from project.logging import configure_logging
 from project.users.views import users_router
 from project.ws import broadcast, ws_router
 from project.ws.views import register_socketio_app
@@ -29,6 +30,7 @@ def create_app() -> FastAPI:
     app.include_router(users_router)
     app.include_router(ws_router)
 
+    configure_logging()
     register_socketio_app(app)
 
     app.add_middleware(

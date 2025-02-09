@@ -2,18 +2,24 @@ import logging
 import random
 
 import requests
-from celery.result import AsyncResult, states
-from fastapi import APIRouter, Request
+from celery.result import AsyncResult
+from celery.signals import after_setup_logger
+from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from .schemas import UserBody
+from project.database import get_async_db_session  # get_db_session
+
+from .models import User
+from .tasks import task_send_welcome_email
 
 logger = logging.getLogger(__name__)
 
 users_router = APIRouter(prefix='/users')
 
 templates = Jinja2Templates(directory='project/users/templates')
+
 
 HTMX_STATUS_CHECK = """
     <div hx-ext="ws" id="message" ws-connect="/ws/task_status/{task_id}">
@@ -37,6 +43,11 @@ def api_call(email: str):
 @users_router.get('/form/')
 def form_example_get(request: Request):
     return templates.TemplateResponse('form.html', {'request': request})
+
+
+@users_router.get('/hello/{number}')
+def hello_world(number: int) -> str:
+    return f'Hello, World! {number}'
 
 
 @users_router.post('/form/')
@@ -106,3 +117,30 @@ def form_socketio_example(request: Request):
 @users_router.get('/form_htmx/')
 def form_htmx_example(request: Request):
     return templates.TemplateResponse('form_htmx.html', {'request': request})
+
+
+@users_router.get('/transaction_celery/')
+async def transaction_celery(session: AsyncSession = Depends(get_async_db_session)):
+    username = make_fake_username()
+    user = User(
+        username=f'{username}',
+        email=f'{username}@test.com',
+    )
+    async with session.begin():
+        session.add(user)
+        await session.flush()  # Ensure the user is persisted and has an ID
+        logger.info(f'user {user.id} {user.username} is persistent now')
+        task = task_send_welcome_email.delay(user.id)
+        return {'message': 'done', 'user_id': user.id, 'task_id': task.id}
+
+
+def make_fake_username():
+    return f'username_{random.randint(1, 100)}'
+
+
+@after_setup_logger.connect()
+def on_after_setup_logger(logger, **kwargs):
+    formatter = logger.handlers[0].formatter
+    file_handler = logging.FileHandler('celery.log')
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)

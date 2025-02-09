@@ -20,6 +20,10 @@ class BaseConfig:
     DATABASE_URL: str = os.environ.get(
         'DATABASE_URL', f'sqlite:///{BASE_DIR}/db.sqlite3'
     )
+    ASYNC_DATABASE_URL: str = os.environ.get(
+        'ASYNC_DATABASE_URL',
+        'postgresql+asyncpg://fastapi_celery:fastapi_celery@db/fastapi_celery',
+    )
     DATABASE_CONNECT_DICT: dict = {}
 
     WS_MESSAGE_QUEUE: str = os.environ.get(

@@ -1,17 +1,11 @@
-import random
 import time
 
-import requests
-from asgiref.sync import async_to_sync
 from celery import Task, shared_task
-from celery.signals import task_postrun
 from celery.utils.log import get_task_logger
 
-from project.users.views import api_call
-from project.ws.views import (
-    update_celery_task_status,
-    update_celery_task_status_socketio,
-)
+from project.database import db_context
+
+# Removed the top-level import of api_call from views to fix circular dependency
 
 logger = get_task_logger(__name__)
 
@@ -24,39 +18,26 @@ class BaseTaskWithRetry(Task):
 
 @shared_task
 def divide(x: int, y: int) -> float:
-    # from celery.contrib import rdb
-    # rdb.set_trace()
-
     time.sleep(5)
     return x / y
 
 
 @shared_task(retry_kwargs={'max_retries': 5})
 def sample_task(email):
+    # Lazy import to break the circular dependency
+    from project.users.views import api_call
+
     api_call(email)
 
 
-@shared_task(bind=True)
-def task_process_notification(self):
-    try:
-        if not random.choice([0, 1]):
-            # mimic random error
-            raise Exception()
-
-        # this would block the I/O
-        requests.post('https://httpbin.org/delay/5')
-    except Exception as e:
-        logger.error('exception raised, it would be retry after 5 seconds')
-        raise self.retry(exc=e, countdown=5)
+@shared_task(base=BaseTaskWithRetry)
+def task_process_notification():
+    time.sleep(3)
+    print('hello')
+    raise Exception()
 
 
-# @task_postrun.connect
-# def task_postrun_handler(task_id, **kwargs):
-#     async_to_sync(update_celery_task_status)(task_id)
-#     update_celery_task_status_socketio(task_id)
-
-
-@shared_task(name='task_schedule_work')
+@shared_task(name='low_priority:task_schedule_work')
 def task_schedule_work():
     logger.info('task_schedule_work run')
 
@@ -84,3 +65,17 @@ def fail_process_notification(self):
     except Exception as e:
         logger.error('exception raised, it would be retry after 5 seconds')
         raise self.retry(exc=e, countdown=5)
+
+
+@shared_task
+def task_send_welcome_email(user_pk):
+    from project.users.models import User
+
+    with db_context() as session:
+        user = session.get(User, user_pk)
+        logger.info(f'send email to {user.email} {user.id}')
+
+
+@shared_task()
+def task_test_logger():
+    logger.info('test')
